@@ -2,7 +2,7 @@
  * @file Implements an Express Node HTTP server.
  */
 import express, {Request, Response} from 'express';
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 import TuitController from './controllers/TuitController';
 
 import UserController from './controllers/UserController';

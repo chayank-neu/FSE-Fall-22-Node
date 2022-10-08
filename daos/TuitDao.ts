@@ -15,7 +15,7 @@ export default class TuitDao implements TuitDaoI {
    }
 
    async findTuitsByUser(uid: string): Promise<Tuit[]> {
-    const tuits =  await TuitModel.find({postedBy: uid});
+    const tuits : any =  await TuitModel.find({postedBy: uid});
     const user_raw_info = await UserModel.findById(uid);
     const tuitsWithUsrInfo: Tuit[] | PromiseLike<Tuit[]> = [];
 
@@ -24,7 +24,7 @@ export default class TuitDao implements TuitDaoI {
             user_raw_info.password, user_raw_info.firstName || '', 
             user_raw_info.lastName||'', user_raw_info.email||'');
 
-        tuits.forEach( (tuit) => {
+        tuits.forEach( (tuit: { tuit: any; postedOn: Date | undefined; postedBy: string | undefined; }) => {
                 tuitsWithUsrInfo.push(new Tuit(
                     tuit.tuit||'', tuit.postedOn, tuit.postedBy
                 ))
@@ -34,7 +34,7 @@ export default class TuitDao implements TuitDaoI {
     }
 
    async createTuit(tuit: Tuit): Promise<User> {
-    const new_tuit =  await TuitModel.create(tuit);
+    const new_tuit : any =  await TuitModel.create(tuit);
     const user_raw_info = await UserModel.findById(new_tuit.postedBy);
     if (user_raw_info != null) {
     const user_info = new User(user_raw_info.username, 
