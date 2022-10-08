@@ -3,7 +3,10 @@ import MaritalStatus from "./MaritalStatus";
 import Location from "./Location";
 
 export default class User {
+
+
    private username: string = '';
+
    private password: string = '';
    private firstName: string | null = null;
    private lastName: string | null = null;
@@ -16,4 +19,17 @@ export default class User {
    private dateOfBirth: Date | null = null;
    private joined: Date = new Date();
    private location: Location | null = null;
+
+   constructor(username?: string, password?: string, 
+      firstName?: string, lastName?: string, email?: string) {
+         this.username = username|| '';
+         this.password = password||'';
+         this.firstName = firstName||'';
+         this.lastName = lastName||'';
+         this.email = email||'';
+      }
+
+   public get getUsername(): string {
+         return this.username;
+      }
 }
