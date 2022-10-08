@@ -13,8 +13,9 @@ const cors = require('cors')
 const app = express();
 app.use(cors());
 app.use(express.json());
+const uri = process.env.MONGODB_URI;
 
-mongoose.connect('mongodb://localhost:27017/tuiter');
+mongoose.connect(uri||'mongodb://localhost:27017/tuiter');
 
 
 // app.get('/', (req: Request, res: Response) =>

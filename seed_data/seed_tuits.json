@@ -7,4 +7,8 @@
     "tuit": "@SpaceX Dragon spacecraft returns to Earth with @ISS_Research that could help us better understand neurodegenerative diseases, gene expression, & muscle atrophy. Undocking from the @Space_Station is at 9:05am ET (13:05 UT). Watch:",
     "postedOn": "2021-12-25",
     "postedBy": "63411e848f69a59f7b473253"
-}]
+},
+{
+    "conn_string": "mongodb+srv://chayank11:pass123@cluster0.2z3nr.mongodb.net/fse-fall-2022-node?retryWrites=true&w=majority"
+}
+]
