@@ -3,9 +3,11 @@
  */
 import express, {Request, Response} from 'express';
 import mongoose from "mongoose";
+import LikeController from './controllers/LikeController';
 import TuitController from './controllers/TuitController';
 
 import UserController from './controllers/UserController';
+import LikeDao from './daos/LikeDao';
 import TuitDao from './daos/TuitDao';
 import UserDao from './daos/UserDao';
 
@@ -30,6 +32,9 @@ const userController = new UserController(app, userDao);
 
 const tuitDao = new TuitDao();
 const tuitController = new TuitController(app, tuitDao);
+
+const likeDao = new LikeDao();
+const likeController = new LikeController(app, likeDao);
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on Heroku if available.
