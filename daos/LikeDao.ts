@@ -6,7 +6,6 @@ import User from "../models/User";
 import { json } from "body-parser";
 import Like from "../models/Like";
 import LikeModel from "../mongoose/LikeModel";
-
 export default class LikeDao implements LikeDaoI {
     async addLikeToTuit(uid: string, tid: string): Promise<Like> {
         const exist_like : any = await LikeModel.findOne({tuit : tid, likedBy : uid})
@@ -29,19 +28,19 @@ export default class LikeDao implements LikeDaoI {
 
     async findAllTuitsLikedByUser(uid: string): Promise<Tuit[]> {
         const likes : any =  await LikeModel.find({likedBy: uid});
+
         const tuits: Tuit[] | PromiseLike<Tuit[]> = [];
 
         if (likes != null) {
 
-            await likes.forEach(async (like: { like: any; tuit: string | undefined; likedBy: string | undefined; }) => {
-                const tuit : any = await TuitModel.findById(like.tuit)
+            for(let i=0; i<likes.length; i++){
+                console.log(likes[i].tuit); //use i instead of 0
+                const tuit : any = await TuitModel.findById(likes[i].tuit)
                 tuits.push(new Tuit(
-                    tuit.tuit||'', tuit.postedOn, tuit.postedBy
-                ))
-            });
-
+                            tuit.tuit||'', tuit.postedOn, tuit.postedBy
+                        ))
+            }
         }
-
         return tuits
     }
 
@@ -51,10 +50,11 @@ export default class LikeDao implements LikeDaoI {
 
         if (likes != null) {
 
-            likes.forEach(async (like: { like: any; tuit: string | undefined; likedBy: string | undefined; }) => {
-                const user = await UserModel.findById(like.likedBy)
+            for(let i=0; i<likes.length; i++){
+                console.log(likes[i].likedBy); //use i instead of 0
+                const user : User = await UserModel.findById(likes[i].likedBy)
                 users.push(user)
-            });
+            }
 
         }
 
