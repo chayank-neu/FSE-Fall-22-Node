@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 
-export default interface TuitController {
+export default interface LikeController {
     addLikeToTuit(req: Request, res: Response): void;
     removeLikeToTuit(req: Request, res: Response): void;
     findAllTuitsLikedByUser(req: Request, res: Response): void;
