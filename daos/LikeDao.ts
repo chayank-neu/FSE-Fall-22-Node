@@ -37,7 +37,7 @@ export default class LikeDao implements LikeDaoI {
                 console.log(likes[i].tuit); //use i instead of 0
                 const tuit : any = await TuitModel.findById(likes[i].tuit)
                 tuits.push(new Tuit(
-                            tuit.tuit||'', tuit.postedOn, tuit.postedBy
+                            tuit._id, tuit.postedOn, tuit.postedBy
                         ))
             }
         }
