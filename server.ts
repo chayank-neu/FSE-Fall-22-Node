@@ -6,12 +6,14 @@ import mongoose from "mongoose";
 import BookmarkController from './controllers/bookmarks/BookmarkController';
 import FollowController from './controllers/FollowController';
 import LikeController from './controllers/LikeController';
+import MessageController from './controllers/messages/MessageController';
 import TuitController from './controllers/TuitController';
 
 import UserController from './controllers/UserController';
 import BookmarkDao from './daos/bookmarks/BookmarkDao';
 import FollowDao from './daos/FollowDao';
 import LikeDao from './daos/LikeDao';
+import MessageDao from './daos/messages/MessageDao';
 import TuitDao from './daos/TuitDao';
 import UserDao from './daos/UserDao';
 
@@ -46,6 +48,9 @@ const followController = new FollowController(app, followDao);
 
 const bookmarkDao = new BookmarkDao();
 const bookmarkController = new BookmarkController(app, bookmarkDao);
+
+const messageDao = new MessageDao();
+const messageController = new MessageController(app, messageDao);
 
 /**
  * Start a server listening at port 4000 locally
