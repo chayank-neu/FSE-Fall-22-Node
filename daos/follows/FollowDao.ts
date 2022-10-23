@@ -1,5 +1,7 @@
-import Tuit from "../../models/tuits/Tuit";
-import TuitModel from "../../mongoose/tuits/TuitModel";
+/**
+ * @file Implements management and  data storage of follows.
+ */
+
 import FollowDaoI from "../../interfaces/follows/FollowDao";
 import UserModel from "../../mongoose/users/UserModel";
 import User from "../../models/users/User";
@@ -9,7 +11,34 @@ import LikeModel from "../../mongoose/likes/LikeModel";
 import Follow from "../../models/follows/Follow";
 import FollowModel from "../../mongoose/follows/FollowModel";
 
+/**
+ * @class FollowDao Implements Data Access Object managing data storage of follows
+ * @implements {FollowDaoI} FollowDaoI
+ * @property {FollowDao} followDao Private single instance of FollowDao
+ */
 export default class FollowDao implements FollowDaoI {
+    private static followDao: FollowDao | null = null;
+
+    /**
+     * Creates a singleton DAO instance
+     * @returns FollowDao
+     */
+    public static getInstance = (): FollowDao => {
+        if(FollowDao.followDao === null){
+            FollowDao.followDao = new FollowDao();
+        }
+        return FollowDao.followDao;
+    }
+
+    private constructor() {
+    }
+
+    /**
+     * Inserts a follow instance into follows collection in the database
+     * @param {string} uid primary key of user who is following the user uid2
+     * @param {string} uid2 primary key of the user who is being followed by uid1
+     * @returns {Promise} To be notified when the follow instance is created in the database
+     */
     async userFollowsAnotherUser(uid: string, uid2: string): Promise<Follow> {
 
         const exist_follow : Follow = await FollowModel
@@ -24,6 +53,12 @@ export default class FollowDao implements FollowDaoI {
         return exist_follow;
     }
 
+    /**
+     * Deletes a follow instance from follows collection in the database
+     * @param {string} uid primary key of user who is following the user uid2
+     * @param {string} uid2 primary key of the user who is being followed by uid1
+     * @returns {Promise} To be notified when the follow instance is removed from the database
+     */
     async userUnfollowsAnotherUser(uid: string, uid2: string): Promise<any> {
         const exist_follow : any = await FollowModel
         .findOne({userFollowed : uid2, userFollowing : uid})
@@ -34,6 +69,11 @@ export default class FollowDao implements FollowDaoI {
         return false;
     }
 
+    /**
+     * Retrieves all the users that are followed by a  user
+     * @param {string} uid User's primary key
+     * @returns {Promise} To be notified when the users are retrieved from database
+     */
     async findAllUsersFollowedByUser(uid: string): Promise<User[]> {
         const follows : any =  await FollowModel
         .find({userFollowing : uid})
@@ -51,6 +91,11 @@ export default class FollowDao implements FollowDaoI {
         return followedUsers
     }
 
+    /**
+     * Retrieves all the followers of a  user
+     * @param {string} uid User's primary key
+     * @returns {Promise} To be notified when the users are retrieved from database
+     */
     async findAllFollowersOfUser(uid: string): Promise<User[]> {
         const follows : any =  await FollowModel
         .find({userFollowed : uid})
