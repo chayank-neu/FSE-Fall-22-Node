@@ -1,3 +1,7 @@
+/**
+ * @file Implements management and  data storage of likes.
+ */
+
 import Tuit from "../../models/tuits/Tuit";
 import TuitModel from "../../mongoose/tuits/TuitModel";
 import LikeDaoI from "../../interfaces/likes/LikeDao";
@@ -6,7 +10,36 @@ import User from "../../models/users/User";
 import { json } from "body-parser";
 import Like from "../../models/likes/Like";
 import LikeModel from "../../mongoose/likes/LikeModel";
+
+/**
+ * @class LikeDao Implements Data Access Object managing data storage of likes
+ * @implements {LikeDaoI} LikeDaoI
+ * @property {LikeDao} likeDao Private single instance of LikeDao
+ */
 export default class LikeDao implements LikeDaoI {
+
+    private static likeDao: LikeDao | null = null;
+
+    /**
+     * Creates a singleton DAO instance
+     * @returns LikeDao
+     */
+    public static getInstance = (): LikeDao => {
+        if(LikeDao.likeDao === null){
+            LikeDao.likeDao = new LikeDao();
+        }
+        return LikeDao.likeDao;
+    }
+
+    private constructor() {
+    }
+
+    /**
+     * Inserts a new like instance into the likes collection in the database
+     * @param {string} uid User's primary key
+     * @param {string} tid Tuit's primary key
+     * @returns {Promise} To be notified when the like instance is inserted into the database
+     */
     async addLikeToTuit(uid: string, tid: string): Promise<Like> {
         const exist_like : any = await LikeModel.findOne({tuit : tid, likedBy : uid})
         if (exist_like == null) {
@@ -18,6 +51,12 @@ export default class LikeDao implements LikeDaoI {
         return exist_like;
     }
 
+    /**
+     * Deletes a like instance from the likes collection in the database
+     * @param {string} uid User's primary key
+     * @param {string} tid Tuit's primary key
+     * @returns {Promise} To be notified when the like instance is deleted from the database
+     */
     async removeLikeToTuit(uid: string, tid: string): Promise<any> {
         const exist_like : any = await LikeModel.findOne({tuit : tid, likedBy : uid})
         if (exist_like != null) {
@@ -26,6 +65,11 @@ export default class LikeDao implements LikeDaoI {
         return false;
     }
 
+    /**
+     * Retrieves all the tuits liked by a particular user
+     * @param {string} uid User's primary key
+     * @returns {Promise} To be notified when the tuits are retrieved from database
+     */
     async findAllTuitsLikedByUser(uid: string): Promise<Tuit[]> {
         const likes : any =  await LikeModel.find({likedBy: uid});
 
@@ -44,6 +88,11 @@ export default class LikeDao implements LikeDaoI {
         return tuits
     }
 
+    /**
+     * Retrieves all the users that liked by a particular tuit
+     * @param {string} tid Tuit's primary key
+     * @returns {Promise} To be notified when the users are retrieved from database
+     */
     async findAllUsersByTuitLike(tid: string): Promise<User[]> {
         const likes : any =  await LikeModel.find({tuit: tid});
         const users: User[] | PromiseLike<User[]> = [];
