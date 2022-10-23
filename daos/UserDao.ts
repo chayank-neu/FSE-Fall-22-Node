@@ -1,5 +1,5 @@
 import User from "../models/User";
-import UserModel from "../mongoose/UserModel";
+import UserModel from "../mongoose/users/UserModel";
 import UserDaoI from "../interfaces/UserDao";
 
 export default class UserDao implements UserDaoI {

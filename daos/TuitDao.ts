@@ -1,7 +1,7 @@
 import Tuit from "../models/Tuit";
-import TuitModel from "../mongoose/TuitModel";
+import TuitModel from "../mongoose/tuits/TuitModel";
 import TuitDaoI from "../interfaces/TuitDao";
-import UserModel from "../mongoose/UserModel";
+import UserModel from "../mongoose/users/UserModel";
 import User from "../models/User";
 import { json } from "body-parser";
 

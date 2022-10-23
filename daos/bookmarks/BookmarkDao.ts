@@ -3,7 +3,7 @@ import BookmarkDaoI from "../../interfaces/bookmarks/BookmarkDao";
 import Bookmark from "../../models/bookmarks/Bookmark";
 import Tuit from "../../models/Tuit";
 import BookmarkModel from "../../mongoose/bookmarks/BookmarkModel";
-import TuitModel from "../../mongoose/TuitModel";
+import TuitModel from "../../mongoose/tuits/TuitModel";
 
 export default class BookmarkDao implements BookmarkDaoI {
 
