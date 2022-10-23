@@ -1,12 +1,30 @@
+/**
+ * @file shows the model of the user
+ */
 import AccountType from "./AccountType";
 import MaritalStatus from "./MaritalStatus";
 import Location from "./Location";
 
+/**
+ * @class this class represents all th information about a User
+ * @property {String} username the username of the user
+ * @property {String} password the password of the user
+ * @property {String} firstName user's first name
+ * @property {String} lastName user's last name
+ * @property {String} email user's email
+ * @property {String} profilePhoto user's profile phot
+ * @property {String} headerImage user's header image
+ * @property {String} accountType user's accounttype
+ * @property {String} maritalStatus user's maritalstatus
+ * @property {String} biography user's biogrpahy 
+ * @property {Date} dateOfBirth user's dat of birth
+ * @property {Date} joined date user joined tuiter
+ * @property {Number} location user's location
+ */
 export default class User {
 
 
    private username: string = '';
-
    private password: string = '';
    private firstName: string | null = null;
    private lastName: string | null = null;
