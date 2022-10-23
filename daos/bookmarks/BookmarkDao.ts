@@ -1,7 +1,7 @@
 import { json } from "body-parser";
 import BookmarkDaoI from "../../interfaces/bookmarks/BookmarkDao";
 import Bookmark from "../../models/bookmarks/Bookmark";
-import Tuit from "../../models/Tuit";
+import Tuit from "../../models/tuits/Tuit";
 import BookmarkModel from "../../mongoose/bookmarks/BookmarkModel";
 import TuitModel from "../../mongoose/tuits/TuitModel";
 

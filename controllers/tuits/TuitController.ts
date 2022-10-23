@@ -1,8 +1,8 @@
 import {Request, Response, Express} from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
-import TuitDao from "../daos/TuitDao";
-import TuitControllerI from "../interfaces/TuitController";
+import TuitDao from "../../daos/tuits/TuitDao";
+import TuitControllerI from "../../interfaces/tuits/TuitController";
 
 export default class TuitController implements TuitControllerI {
    app: Express;

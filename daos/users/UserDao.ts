@@ -1,6 +1,6 @@
-import User from "../models/User";
-import UserModel from "../mongoose/users/UserModel";
-import UserDaoI from "../interfaces/UserDao";
+import User from "../../models/users/User";
+import UserModel from "../../mongoose/users/UserModel";
+import UserDaoI from "../../interfaces/users/UserDao";
 
 export default class UserDao implements UserDaoI {
    async findAllUsers(): Promise<User[]> {

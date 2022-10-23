@@ -1,9 +1,9 @@
 import {Request, Response, Express} from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
-import FollowDao from "../daos/FollowDao";
-import LikeDao from "../daos/LikeDao";
-import FollowControllerI from "../interfaces/FollowController";
+import FollowDao from "../../daos/follows/FollowDao";
+import LikeDao from "../../daos/likes/LikeDao";
+import FollowControllerI from "../../interfaces/follows/FollowController";
 
 export default class FollowController implements FollowControllerI {
    app: Express;

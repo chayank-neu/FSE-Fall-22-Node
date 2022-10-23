@@ -1,11 +1,11 @@
-import Tuit from "../models/Tuit";
-import TuitModel from "../mongoose/tuits/TuitModel";
-import LikeDaoI from "../interfaces/LikeDao";
-import UserModel from "../mongoose/users/UserModel";
-import User from "../models/User";
+import Tuit from "../../models/tuits/Tuit";
+import TuitModel from "../../mongoose/tuits/TuitModel";
+import LikeDaoI from "../../interfaces/likes/LikeDao";
+import UserModel from "../../mongoose/users/UserModel";
+import User from "../../models/users/User";
 import { json } from "body-parser";
-import Like from "../models/Like";
-import LikeModel from "../mongoose/likes/LikeModel";
+import Like from "../../models/likes/Like";
+import LikeModel from "../../mongoose/likes/LikeModel";
 export default class LikeDao implements LikeDaoI {
     async addLikeToTuit(uid: string, tid: string): Promise<Like> {
         const exist_like : any = await LikeModel.findOne({tuit : tid, likedBy : uid})

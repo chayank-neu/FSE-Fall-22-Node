@@ -1,6 +1,6 @@
-import Like from "../models/Like";
-import Tuit from "../models/Tuit";
-import User from "../models/User";
+import Like from "../models/likes/Like";
+import Tuit from "../models/tuits/Tuit";
+import User from "../models/users/User";
 
 export default interface LikeDao {
    addLikeToTuit(uid: string, tid: string): Promise<Like>;

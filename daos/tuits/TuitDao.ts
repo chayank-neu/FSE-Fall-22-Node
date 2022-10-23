@@ -1,8 +1,8 @@
-import Tuit from "../models/Tuit";
-import TuitModel from "../mongoose/tuits/TuitModel";
-import TuitDaoI from "../interfaces/TuitDao";
-import UserModel from "../mongoose/users/UserModel";
-import User from "../models/User";
+import Tuit from "../../models/tuits/Tuit";
+import TuitModel from "../../mongoose/tuits/TuitModel";
+import TuitDaoI from "../../interfaces/tuits/TuitDao";
+import UserModel from "../../mongoose/users/UserModel";
+import User from "../../models/users/User";
 import { json } from "body-parser";
 
 export default class TuitDao implements TuitDaoI {

@@ -1,8 +1,8 @@
 import {Request, Response, Express} from "express";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
-import LikeDao from "../daos/LikeDao";
-import LikeControllerI from "../interfaces/LikeController";
+import LikeDao from "../../daos/likes/LikeDao";
+import LikeControllerI from "../../interfaces/likes/LikeController";
 
 export default class LikeController implements LikeControllerI {
    app: Express;

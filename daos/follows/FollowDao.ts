@@ -1,13 +1,13 @@
-import Tuit from "../models/Tuit";
-import TuitModel from "../mongoose/tuits/TuitModel";
-import FollowDaoI from "../interfaces/FollowDao";
-import UserModel from "../mongoose/users/UserModel";
-import User from "../models/User";
+import Tuit from "../../models/tuits/Tuit";
+import TuitModel from "../../mongoose/tuits/TuitModel";
+import FollowDaoI from "../../interfaces/follows/FollowDao";
+import UserModel from "../../mongoose/users/UserModel";
+import User from "../../models/users/User";
 import { json } from "body-parser";
-import Like from "../models/Like";
-import LikeModel from "../mongoose/likes/LikeModel";
-import Follow from "../models/Follow";
-import FollowModel from "../mongoose/follows/FollowModel";
+import Like from "../../models/likes/Like";
+import LikeModel from "../../mongoose/likes/LikeModel";
+import Follow from "../../models/follows/Follow";
+import FollowModel from "../../mongoose/follows/FollowModel";
 
 export default class FollowDao implements FollowDaoI {
     async userFollowsAnotherUser(uid: string, uid2: string): Promise<Follow> {

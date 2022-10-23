@@ -1,7 +1,7 @@
-import Follow from "../models/Follow";
-import Like from "../models/Like";
-import Tuit from "../models/Tuit";
-import User from "../models/User";
+import Follow from "../models/follows/Follow";
+import Like from "../models/likes/Like";
+import Tuit from "../models/tuits/Tuit";
+import User from "../models/users/User";
 
 export default interface FollowDao {
    userFollowsAnotherUser(uid: string, uid2: string): Promise<Follow>;
