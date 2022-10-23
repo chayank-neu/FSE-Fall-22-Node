@@ -1,3 +1,6 @@
+/**
+ * @file Represents the bookmark DAO methods
+ */
 import Bookmark from "../../models/bookmarks/Bookmark";
 import Tuit from "../../models/tuits/Tuit";
 

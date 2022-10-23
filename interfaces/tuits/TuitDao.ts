@@ -1,5 +1,8 @@
-import Tuit from "../models/tuits/Tuit";
-import User from "../models/users/User";
+/**
+ * @file Represents the tuit DAO methods
+ */
+import Tuit from "../../models/tuits/Tuit";
+import User from "../../models/users/User";
 
 export default interface TuitDao {
    findAllTuits(): Promise<Tuit[]>;

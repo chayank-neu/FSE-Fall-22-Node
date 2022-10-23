@@ -1,3 +1,6 @@
+/**
+ * @file Declares the apis for User management
+ */
 import {Request, Response} from "express";
 
 export default interface UserController {

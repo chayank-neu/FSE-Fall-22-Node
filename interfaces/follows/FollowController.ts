@@ -1,3 +1,6 @@
+/**
+ * @file Declares the apis for Follow related operation management
+ */
 import {Request, Response} from "express";
 
 export default interface FollowController {

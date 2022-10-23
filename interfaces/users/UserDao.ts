@@ -1,4 +1,7 @@
-import User from "../models/users/User";
+/**
+ * @file Represents the user DAO methods
+ */
+import User from "../../models/users/User";
 
 export default interface UserDao {
    findAllUsers(): Promise<User[]>;

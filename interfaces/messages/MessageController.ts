@@ -1,3 +1,6 @@
+/**
+ * @file Declares the apis for Message related operation management
+ */
 import {Request, Response} from "express";
 
 export default interface MessageController {

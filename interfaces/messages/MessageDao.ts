@@ -1,3 +1,6 @@
+/**
+ * @file Represents the message DAO methods
+ */
 import Message from "../../models/messages/Message";
 
 export default interface MessageDao {
