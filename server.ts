@@ -32,25 +32,12 @@ mongoose.connect(uri||'mongodb://localhost:27017/tuiter');
 // app.get('/hello', (req: Request, res: Response) =>
 //     res.send('Welcome to Foundation of Software Engineering!'));
 
-
-const userDao = new UserDao();
-const userController = new UserController(app, userDao);
-
-const tuitDao = new TuitDao();
-const tuitController = new TuitController(app, tuitDao);
-
-const likeDao = new LikeDao();
-const likeController = new LikeController(app, likeDao);
-
-
-const followDao = new FollowDao();
-const followController = new FollowController(app, followDao);
-
-const bookmarkDao = new BookmarkDao();
-const bookmarkController = new BookmarkController(app, bookmarkDao);
-
-const messageDao = new MessageDao();
-const messageController = new MessageController(app, messageDao);
+TuitController.getInstance(app)
+UserController.getInstance(app);
+LikeController.getInstance(app);
+FollowController.getInstance(app);
+BookmarkController.getInstance(app);
+MessageController.getInstance(app);
 
 /**
  * Start a server listening at port 4000 locally
