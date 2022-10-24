@@ -1,5 +1,17 @@
 /**
- * @file Implements an Express Node HTTP server.
+ * @file Implements an Express Node HTTP server. Declares RESTful Web services
+ * enabling CRUD operations on the following resources:
+ * <ul>
+ *     <li>users</li>
+ *     <li>tuits</li>
+ *     <li>likes</li>
+ *     <li>follows</li>
+ *     <li>bookmarks</li>
+ *     <li>messages</li>
+ * </ul>
+ * 
+ * Connects to a remote MongoDB instance hosted on the Atlas cloud database
+ * service
  */
 import express, {Request, Response} from 'express';
 import mongoose from "mongoose";
@@ -16,8 +28,10 @@ app.use(cors());
 app.use(express.json());
 const uri = process.env.MONGODB_URI;
 
+// connect to the database
 mongoose.connect(uri||'mongodb://localhost:27017/tuiter');
 
+// create RESTful Web service API
 TuitController.getInstance(app)
 UserController.getInstance(app);
 LikeController.getInstance(app);
