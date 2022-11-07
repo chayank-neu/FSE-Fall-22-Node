@@ -51,7 +51,7 @@ export default class UserDao implements UserDaoI {
      */
    async createUser(user: User): Promise<User> {
     const a : any = await UserModel.create(user);
-    return new User(a.username, a.password, a.firstName || '', a.lastName||'', a.email||'');
+    return a;
    }
 
    /**
@@ -62,6 +62,15 @@ export default class UserDao implements UserDaoI {
    async deleteUser(uid: string):  Promise<any> {
        return await UserModel.deleteOne({_id: uid});
    }
+
+   /**
+     * Deletes a user from the database
+     * @param {string} username username of the user
+     * @returns {Promise} To be notified when user is deleted from the database
+     */
+    async deleteUserByUsername(usrname: string):  Promise<any> {
+      return await UserModel.deleteOne({username: usrname});
+  }
 
    /**
      * Updates a particular user in database with new values provided

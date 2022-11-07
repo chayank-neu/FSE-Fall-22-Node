@@ -75,16 +75,17 @@ export default class TuitDao implements TuitDaoI {
      * @param {Tuit} tuit the tuit to be inserted
      * @returns {Promise} To be notified when tuit is inserted into the database
      */
-   async createTuit(tuit: Tuit): Promise<User> {
+   async createTuit(tuit: Tuit): Promise<Tuit> {
     const new_tuit : any =  await TuitModel.create(tuit);
-    const user_raw_info = await UserModel.findById(new_tuit.postedBy);
-    if (user_raw_info != null) {
-    const user_info = new User(user_raw_info.username, 
-        user_raw_info.password, user_raw_info.firstName || '', 
-        user_raw_info.lastName||'', user_raw_info.email||'');
-    return user_info;
-    }
-       return new User();
+    return new_tuit;
+    // const user_raw_info = await UserModel.findById(new_tuit.postedBy);
+    // if (user_raw_info != null) {
+    // const user_info = new User(user_raw_info.username, 
+    //     user_raw_info.password, user_raw_info.firstName || '', 
+    //     user_raw_info.lastName||'', user_raw_info.email||'');
+    // return user_info;
+    // }
+    //    return new User();
    }
 
    /**
