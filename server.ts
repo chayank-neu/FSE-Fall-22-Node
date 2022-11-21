@@ -23,14 +23,44 @@ import TuitController from './controllers/tuits/TuitController';
 import UserController from './controllers/users/UserController';
 import AuthenticationController from './controllers/auth/auth-controller';
 
-const cors = require('cors')
-const app = express();
-app.use(cors());
-app.use(express.json());
-const uri = process.env.MONGODB_URI;
 
+const cors = require('cors')
+const session = require("express-session");
+
+const uri = process.env.MONGODB_URI;
 // connect to the database for CRUD
 mongoose.connect(uri||'mongodb://localhost:27017/tuiter');
+
+const app = express();
+
+app.use(
+    cors({
+       credentials: true,
+       origin: process.env.CORS_ORIGIN
+           ? process.env.CORS_ORIGIN
+           : "http://localhost:3000",
+    })
+);
+
+let sess = {
+    secret: "C[Ps9E%q6woaip",
+    saveUninitialized: true,
+    resave: true,
+    cookie: {
+        sameSite: (process.env.ENV ? process.env.ENV : "dev") === "production" ? "none" : "lax",
+        secure: process.env.ENV === "production",
+    },
+};
+
+if (process.env.ENV === 'production') {
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+ }
+
+app.use(session(sess));
+
+app.use(express.json());
+
 
 // create RESTful Web service API
 TuitController.getInstance(app)
