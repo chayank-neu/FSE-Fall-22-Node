@@ -72,6 +72,16 @@ export default class UserDao implements UserDaoI {
       return await UserModel.deleteOne({username: usrname});
   }
 
+  /**
+     * finds a user from the database
+     * @param {string} username username of the user
+     * @returns {Promise} user found from the database
+     */
+   async findUserByUsername(usrname: string):  Promise<any> {
+    return await UserModel.findOne({username: usrname});
+
+  }
+
    /**
      * Updates a particular user in database with new values provided
      * @param {string} uid Primary key of user

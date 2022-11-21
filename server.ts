@@ -21,6 +21,7 @@ import LikeController from './controllers/likes/LikeController';
 import MessageController from './controllers/messages/MessageController';
 import TuitController from './controllers/tuits/TuitController';
 import UserController from './controllers/users/UserController';
+import AuthenticationController from './controllers/auth/auth-controller';
 
 const cors = require('cors')
 const app = express();
@@ -28,7 +29,7 @@ app.use(cors());
 app.use(express.json());
 const uri = process.env.MONGODB_URI;
 
-// connect to the database
+// connect to the database for CRUD
 mongoose.connect(uri||'mongodb://localhost:27017/tuiter');
 
 // create RESTful Web service API
@@ -38,6 +39,7 @@ LikeController.getInstance(app);
 FollowController.getInstance(app);
 BookmarkController.getInstance(app);
 MessageController.getInstance(app);
+AuthenticationController(app);
 
 /**
  * Start a server listening at port 4000 locally

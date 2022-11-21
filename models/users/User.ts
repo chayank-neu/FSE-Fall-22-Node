@@ -47,7 +47,12 @@ export default class User {
          this.email = email||'';
       }
 
-   public get getUsername(): string {
+   
+      public get getUsername(): string {
          return this.username;
+      }
+
+      public set setPassword(pass : string) {
+         this.password = pass;
       }
 }
