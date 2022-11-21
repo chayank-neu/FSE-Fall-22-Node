@@ -46,9 +46,20 @@ export default class TuitController implements TuitControllerI {
      * @param {Request} req from the client with userid as the primary key of the user whos tuits have to be retrieved
      * @param {Response} res is the response to the client as JSON
      */
-    findTuitsByUser = (req: Request, res: Response) =>
-    this.tuitDao.findTuitsByUser(req.params.uid)
+    findTuitsByUser = (req: Request, res: Response) => {
+        // @ts-ignore
+        let userId = req.params.uid === "my" && req.session['profile'] ?
+            // @ts-ignore
+            req.session['profile']._id : req.params.uid;
+        if (userId === 'my') {
+            res.sendStatus(503);
+            return;
+        }
+
+        this.tuitDao.findTuitsByUser(userId)
         .then(tuits => res.json(tuits));
+    }
+    
 
     /**
      * Retrieves one particular tuit from the database
@@ -66,9 +77,18 @@ export default class TuitController implements TuitControllerI {
      * containing the JSON object with new tuit contents
      * @param {Response} res Represents response to client as JSON
      */
-    createTuit = (req: Request, res: Response) =>
-    this.tuitDao.createTuit(req.body)
+    createTuit = (req: Request, res: Response) =>{
+        // @ts-ignore
+        let userId = req.params.uid === "my" && req.session['profile'] ?
+            // @ts-ignore
+            req.session['profile']._id : req.params.uid;
+
+        console.log(userId);
+
+        this.tuitDao.createTuitByUser(userId, req.body)
         .then(tuit => res.json(tuit));
+    }
+    
 
     /**
      * Updates an existing tuit in the database
