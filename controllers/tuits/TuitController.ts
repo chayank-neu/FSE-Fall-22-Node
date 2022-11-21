@@ -30,7 +30,7 @@ export default class TuitController implements TuitControllerI {
             app.get('/tuits', TuitController.tuitController.findAllTuits);
             app.get('/tuits/:tid', TuitController.tuitController.findTuitById);
             app.get('/users/:uid/tuits', TuitController.tuitController.findTuitsByUser);
-            app.post('/tuits', TuitController.tuitController.createTuit);
+            app.post('/users/:uid/tuits', TuitController.tuitController.createTuit);
             app.delete('/tuits/:tid', TuitController.tuitController.deleteTuit);
             app.put('/tuits/:tid', TuitController.tuitController.updateTuit);
        
@@ -48,10 +48,10 @@ export default class TuitController implements TuitControllerI {
      */
     findTuitsByUser = (req: Request, res: Response) => {
         // @ts-ignore
-        let userId = req.params.uid === "my" && req.session['profile'] ?
+        let userId = req.params.uid === "me" && req.session['profile'] ?
             // @ts-ignore
             req.session['profile']._id : req.params.uid;
-        if (userId === 'my') {
+        if (userId === 'me') {
             res.sendStatus(503);
             return;
         }
@@ -79,7 +79,7 @@ export default class TuitController implements TuitControllerI {
      */
     createTuit = (req: Request, res: Response) =>{
         // @ts-ignore
-        let userId = req.params.uid === "my" && req.session['profile'] ?
+        let userId = req.params.uid === "me" && req.session['profile'] ?
             // @ts-ignore
             req.session['profile']._id : req.params.uid;
 

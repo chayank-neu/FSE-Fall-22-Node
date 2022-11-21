@@ -56,6 +56,7 @@ const AuthenticationController = (app: Express) => {
     const existingUser = await userDao
       .findUserByUsername(username);
   
+    console.log(existingUser)
     if (!existingUser) {
       res.sendStatus(403);
       return;
