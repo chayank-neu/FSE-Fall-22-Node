@@ -109,5 +109,27 @@ export default class LikeDao implements LikeDaoI {
 
         return users
     }
+
+    /**
+     * retrieves count of likes for tuit
+     * @param {string} tid tuit's id
+     * @returns Promise To be notified when count is retrieved from the database
+     */
+     async countHowManyLikedTuit(tid: string): Promise<any> {
+        return LikeModel.count({tuit: tid});
+    }
+
+    /**
+     * Uses LikeModel to retrieve if user liked a specified tuit
+     * @param {string} uid user's id
+     * @param {string} tid tuit's id
+     * @returns Promise To be notified when like is retrieved from the database
+     */
+     async findUserLikesTuit(uid: string, tid: string): Promise<Like> {
+        return LikeModel.findOne({
+            tuit: tid,
+            likedBy: uid
+        });
+    }    
    
 }
