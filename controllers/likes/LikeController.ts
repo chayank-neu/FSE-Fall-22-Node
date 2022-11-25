@@ -33,6 +33,7 @@ export default class LikeController implements LikeControllerI {
             app.delete('/users/:uid/likes/:tid', LikeController.likeController.removeLikeToTuit);
             app.get('/users/:uid/likes', LikeController.likeController.findAllTuitsLikedByUser);
             app.get('/tuits/:tid/likes', LikeController.likeController.findAllUsersByTuitLike);
+            app.put('/users/:uid/likes/:tid', LikeController.likeController.userTogglesTuitLikes);
 
         }
         return LikeController.likeController;
