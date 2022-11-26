@@ -52,23 +52,18 @@ export default class TuitDao implements TuitDaoI {
      * @returns {Promise} To be notified when tuits are retrieved from the database
      */
    async findTuitsByUser(uid: string): Promise<Tuit[]> {
-    const tuits : any =  await TuitModel.find({postedBy: uid});
-    const user_raw_info = await UserModel.findById(uid);
-    const tuitsWithUsrInfo: Tuit[] | PromiseLike<Tuit[]> = [];
+    // console.log(TuitModel
+    //   .find({postedBy: uid})
+    //   .populate('postedBy', 'username')
+    //   .exec())
+    const x =  await TuitModel
+        .find({postedBy: uid})
+        .populate('postedBy', 'username')
+        .exec();
 
-    if (user_raw_info != null) {
-        const user_info = new User(user_raw_info.username, 
-            user_raw_info.password, user_raw_info.firstName || '', 
-            user_raw_info.lastName||'', user_raw_info.email||'');
-
-        tuits.forEach( (tuit: { tuit: any; postedOn: Date | undefined; postedBy: string | undefined; }) => {
-                tuitsWithUsrInfo.push(new Tuit(
-                    tuit.tuit||'', tuit.postedOn, tuit.postedBy
-                ))
-            });
-    }
-    return tuitsWithUsrInfo;
-    }
+        console.log(x)
+        return x;
+  }
 
     /**
      * Inserts a new tuit into the database
