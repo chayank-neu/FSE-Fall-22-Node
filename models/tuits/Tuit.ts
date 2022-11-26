@@ -1,32 +1,21 @@
-/**
- * @file shows the model of the tuit
- */
+import User from "../users/User";
 
 /**
  * @class Tuit Represents a tuit that is posted by the user
+ * @property {string} id the primary key of the tuit
  * @property {string} tuit content of the tuit posted
  * @property {Date} postedOn creation time of tuit
  * @property {User} postedBy reference to the user who posted the tuit
+ * @property {Stats} stats the stats of the tuit
+ * @property {boolean} isLiked indicates if the tuit is liked by a particular user or not
+ * @property {boolean} isDisliked indicates if the tuit is disliked by a particular user or not
  */
-export default class Tuit {
-   private tuit: string = '';
-   private postedOn: Date = new Date();
-   private postedBy: string;
-
-   constructor(tuit?: string, postedOn?: Date, 
-      postedBy?: string) {
-         this.tuit = tuit||'';
-         this.postedOn = postedOn||new Date();
-         this.postedBy = postedBy||"";
-      }
-
-
-   get getPostedBy() : string {
-      return this.postedBy;
-   }
-
-   set setPostedBy(uid : string) {
-      this.postedBy = uid;
-   }
-
+export default interface Tuit {
+    _id: string;
+    tuit: string;
+    postedOn: Date;
+    postedBy: string;
+    stats: any;
+    isLiked?: boolean;
+    isDisliked?: boolean;
 }

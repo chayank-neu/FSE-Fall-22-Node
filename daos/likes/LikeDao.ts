@@ -71,21 +71,32 @@ export default class LikeDao implements LikeDaoI {
      * @returns {Promise} To be notified when the tuits are retrieved from database
      */
     async findAllTuitsLikedByUser(uid: string): Promise<Tuit[]> {
-        const likes : any =  await LikeModel.find({likedBy: uid});
+        // const likes : any =  await LikeModel.find({likedBy: uid});
 
-        const tuits: Tuit[] | PromiseLike<Tuit[]> = [];
+        // const tuits: Tuit[] | PromiseLike<Tuit[]> = [];
 
-        if (likes != null) {
+        // if (likes != null) {
 
-            for(let i=0; i<likes.length; i++){
-                console.log(likes[i].tuit); //use i instead of 0
-                const tuit : any = await TuitModel.findById(likes[i].tuit)
-                tuits.push(new Tuit(
-                            tuit._id, tuit.postedOn, tuit.postedBy
-                        ))
-            }
-        }
-        return tuits
+        //     for(let i=0; i<likes.length; i++){
+        //         console.log(likes[i].tuit); //use i instead of 0
+        //         const tuit : any = await TuitModel.findById(likes[i].tuit)
+        //         tuits.push(new Tuit(
+        //                     tuit._id, tuit.postedOn, tuit.postedBy
+        //                 ))
+        //     }
+        // }
+        // return tuits
+
+
+        return LikeModel
+            .find(({likedBy: uid}))
+            .populate({
+                path: 'tuit',
+                populate: {
+                    path: 'postedBy'
+                }
+            })
+            .exec();
     }
 
     /**
@@ -109,5 +120,27 @@ export default class LikeDao implements LikeDaoI {
 
         return users
     }
+
+    /**
+     * retrieves count of likes for tuit
+     * @param {string} tid tuit's id
+     * @returns Promise To be notified when count is retrieved from the database
+     */
+     async countHowManyLikedTuit(tid: string): Promise<any> {
+        return LikeModel.count({tuit: tid});
+    }
+
+    /**
+     * Uses LikeModel to retrieve if user liked a specified tuit
+     * @param {string} uid user's id
+     * @param {string} tid tuit's id
+     * @returns Promise To be notified when like is retrieved from the database
+     */
+     async findUserLikesTuit(uid: string, tid: string): Promise<Like> {
+        return LikeModel.findOne({
+            tuit: tid,
+            likedBy: uid
+        });
+    }    
    
 }
