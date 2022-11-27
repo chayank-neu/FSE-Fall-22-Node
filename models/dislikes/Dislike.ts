@@ -5,7 +5,7 @@
 /**
  * @class Represents the dislike relation between user and tuit
  * @property {Tuit} tuit the tuit disliked
- * @property {User} likedBy user disliked the tuit
+ * @property {User} dislikedBy user disliked the tuit
  */
  export default class Dislike {
 

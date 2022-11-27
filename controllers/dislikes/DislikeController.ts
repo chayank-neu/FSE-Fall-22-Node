@@ -97,6 +97,8 @@ export default class DislikeController implements DislikeControllerI {
         const profile = req.session['profile'];
         const userId = uid === "me" && profile ?
                 profile._id : uid;
+
+        console.log('came here')
         try {
             const userAlreadyDislikedTuit = await DislikeController.dislikeDao
                 .findUserDislikesTuit(userId, tid);
