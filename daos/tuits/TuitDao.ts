@@ -58,7 +58,6 @@ export default class TuitDao implements TuitDaoI {
     //   .exec())
     const x =  await TuitModel
         .find({postedBy: uid})
-        .populate('postedBy', 'username')
         .exec();
 
         console.log(x)
