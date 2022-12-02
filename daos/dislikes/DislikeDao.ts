@@ -73,9 +73,22 @@ export default class DislikeDao implements DislikeDaoI {
      */
     async findAllTuitsDislikedByUser(uid: string): Promise<Tuit[]> {
 
-        return DislikeModel
+        const dislikedtuits = await DislikeModel
             .find(({dislikedBy: uid}))
             .exec();
+
+            const tuits: Tuit[] | PromiseLike<Tuit[]> = [];
+            if (dislikedtuits != null) {
+
+                for(let i=0; i<dislikedtuits.length; i++){
+                    console.log(dislikedtuits[i].tuit); //use i instead of 0
+                    const tuit : Tuit = await TuitModel.findById(dislikedtuits[i].tuit)
+                    tuits.push(tuit)
+                }
+    
+            }
+
+            return tuits;
     }
 
     /**
