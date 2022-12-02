@@ -72,10 +72,22 @@ export default class LikeDao implements LikeDaoI {
      */
     async findAllTuitsLikedByUser(uid: string): Promise<Tuit[]> {
 
-
-        return LikeModel
+        const likedtuits = await LikeModel
             .find(({likedBy: uid}))
             .exec();
+
+            const tuits: Tuit[] | PromiseLike<Tuit[]> = [];
+            if (likedtuits != null) {
+
+                for(let i=0; i<likedtuits.length; i++){
+                    console.log(likedtuits[i].tuit); //use i instead of 0
+                    const tuit : Tuit = await TuitModel.findById(likedtuits[i].tuit)
+                    tuits.push(tuit)
+                }
+    
+            }
+
+            return tuits;
     }
 
     /**
