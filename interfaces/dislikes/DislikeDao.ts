@@ -1,7 +1,7 @@
 /**
  * @file Represents the like DAO methods
  */
-import Dislike from "../../models/dislikes/dislike";
+import Dislike from "../../models/dislikes/Dislike";
 import Tuit from "../../models/tuits/Tuit";
 import User from "../../models/users/User";
 
