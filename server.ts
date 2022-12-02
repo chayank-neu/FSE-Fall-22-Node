@@ -18,6 +18,7 @@ import mongoose from "mongoose";
 import BookmarkController from './controllers/bookmarks/BookmarkController';
 import FollowController from './controllers/follows/FollowController';
 import LikeController from './controllers/likes/LikeController';
+import DislikeController from './controllers/dislikes/DislikeController';
 import MessageController from './controllers/messages/MessageController';
 import TuitController from './controllers/tuits/TuitController';
 import UserController from './controllers/users/UserController';
@@ -66,6 +67,7 @@ app.use(express.json());
 TuitController.getInstance(app)
 UserController.getInstance(app);
 LikeController.getInstance(app);
+DislikeController.getInstance(app);
 FollowController.getInstance(app);
 BookmarkController.getInstance(app);
 MessageController.getInstance(app);
